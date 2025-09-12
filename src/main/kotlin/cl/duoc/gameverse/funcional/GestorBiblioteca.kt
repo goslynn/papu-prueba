@@ -9,10 +9,10 @@ import java.time.LocalDate
 
 class GestorBiblioteca {
     companion object {
-        val DATABASE : List<VideoJuego> = database()
+        private val DATABASE: List<VideoJuego> = database()
 
-        private fun database(): List<VideoJuego> {
-            return listOf(
+        private fun database(): List<VideoJuego> =
+            listOf(
                 VideoJuegoRPG(
                     "The Witcher 3",
                     39.99,
@@ -51,7 +51,7 @@ class GestorBiblioteca {
                     LocalDate.of(2020, 9, 17),
                     9.0,
                     true,
-                    arrayOf("Mitología", "Roguelike"),
+                    arrayOf("Mitología", "Roguelike")
                 ),
                 VideoJuegoIndie(
                     "Hollow Knight",
@@ -62,8 +62,11 @@ class GestorBiblioteca {
                     arrayOf("Metroidvania", "Plataformas")
                 )
             )
-        }
+
+        fun getDatabase(): MutableList<VideoJuego> = DATABASE.toMutableList()
+
     }
+
 
     fun orderBySuccessAscending(listado: Collection<Analizable>): List<Analizable> {
         return listado.sortedBy{it.analizar()}

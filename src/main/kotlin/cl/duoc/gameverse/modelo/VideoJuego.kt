@@ -22,4 +22,12 @@ abstract class VideoJuego(
         }
     }
 
+    override fun toString(): String {
+        return "VideoJuego(title='$title', price=$price, launchDate=$launchDate, rating=$rating)"
+    }
+
+    fun descripcion(): String {
+        return "$title ($launchDate) - rating: $rating, success: ${analizar()}"
+    }
+
 }

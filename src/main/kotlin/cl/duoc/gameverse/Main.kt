@@ -1,12 +1,23 @@
 package cl.duoc.gameverse
 
+import cl.duoc.gameverse.funcional.GestorBiblioteca
+import cl.duoc.gameverse.ui.MenuConsola
 
-import cl.duoc.gameverse.ui.MenuCli
-import cl.duoc.gameverse.ui.OpcionMenu
 
 fun main() {
-    MenuCli.LEYENDA = false;
-    val menu = MenuCli.forEnum<OpcionMenu>(label = { it.desc })
-    val selected: OpcionMenu = menu.showMenu()
-    println("Elegiste: $selected")
+    val menu = MenuConsola( titulo = "Biblioteca GameVerse", choices = getOpcionesMenu(GestorBiblioteca()))
+    menu.run()
+}
+
+//TODO : Implementar las acciones reales.
+fun getOpcionesMenu(gestor : GestorBiblioteca) : Map<Int, MenuConsola.OpcionMenu> {
+    return mapOf(
+        Pair(1,
+        MenuConsola.OpcionMenu("Ver biblioteca completa") { print("hola chavales") }),
+        Pair(2,
+            MenuConsola.OpcionMenu("Analisis de exito (Async)") { print("hola exito") }),
+        Pair(3,
+            MenuConsola.OpcionMenu("Filtrar por año") {print("que carajo que mierda")}),
+        Pair(4,
+            MenuConsola.OpcionMenu("Estadisticas ed la biblioteca") {print("saludos cordiales")}))
 }
