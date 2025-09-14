@@ -1,8 +1,8 @@
 package cl.duoc.gameverse.modelo.analisis
 
-sealed class EstadoAnalisis(val progress: Int) {
-    data object Iniciando : EstadoAnalisis(25)
-    data object Analizando: EstadoAnalisis(50)
-    data object Completado : EstadoAnalisis(75)
-    data object Fallido : EstadoAnalisis(100)
+sealed class EstadoAnalisis(val msg: String) {
+    data object Iniciando : EstadoAnalisis("Iniciando analisis")
+    data object Analizando: EstadoAnalisis("Analizando algoritmos de exito")
+    data object Completado : EstadoAnalisis("Finalizamos analisis")
+    data object Fallido : EstadoAnalisis("Fallamos analisis")
 }

@@ -5,6 +5,7 @@ import cl.duoc.gameverse.modelo.VideoJuegoAccion
 import cl.duoc.gameverse.modelo.VideoJuegoIndie
 import cl.duoc.gameverse.modelo.VideoJuegoRPG
 import cl.duoc.gameverse.modelo.analisis.Analizable
+import cl.duoc.gameverse.modelo.analisis.ResultadoAnalisis
 import java.time.LocalDate
 
 class GestorBiblioteca {
@@ -68,25 +69,23 @@ class GestorBiblioteca {
     }
 
 
-    fun orderBySuccessAscending(listado: Collection<Analizable>): List<Analizable> {
-        return listado.sortedBy{it.analizar()}
+    fun orderBySuccessAscending(listado: Collection<Analizable>): List<ResultadoAnalisis> {
+        return listado.map{ResultadoAnalisis(it.analizar(), it)}
+            .sortedBy{ it.succesRate }
+
     }
 
-    fun orderBySuccessDescending(listado: Collection<Analizable>): List<Analizable> {
-        return listado.sortedByDescending{ it.analizar() }
+    fun orderBySuccessDescending(listado: Collection<Analizable>): List<ResultadoAnalisis> {
+        return listado.map{ ResultadoAnalisis(it.analizar(), it) }
+            .sortedByDescending { it.succesRate }
     }
 
-    fun getTopN(listado: Collection<Analizable>, top : Int): List<Analizable> {
+    fun getTopN(listado: Collection<Analizable>, top : Int): List<ResultadoAnalisis> {
         return orderBySuccessDescending(listado).subList(0, top);
     }
 
-    fun getBottomN(listado: Collection<Analizable>, bottom : Int): List<Analizable> {
+    fun getBottomN(listado: Collection<Analizable>, bottom : Int): List<ResultadoAnalisis> {
         return orderBySuccessAscending(listado).subList(0, bottom);
     }
-
-
-
-
-
 
 }

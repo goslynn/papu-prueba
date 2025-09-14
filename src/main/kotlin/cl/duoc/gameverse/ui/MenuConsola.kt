@@ -16,8 +16,8 @@ class MenuConsola(
 
     /** Pinta encabezado y todas las opciones (BotonConsola). */
     private fun show() {
-        println("=== $titulo ===")
         println()
+        println("=== $titulo ===")
         choices.forEach { println("${it.key}. ${it.value.description}") }
         print(prompt)
     }
@@ -38,8 +38,13 @@ class MenuConsola(
                 }
                 else -> {
                     val num = input.toInt()
-                    choices[num]?.event?.run()
-                        ?: System.err.println("Opción inválida")
+                    try {
+                        choices[num]?.event?.run()
+                            ?: System.err.println("Opción inválida")
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
                 }
             }
         }
